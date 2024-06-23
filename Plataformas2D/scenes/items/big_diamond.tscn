@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjgv4m7efs5si"]
 
-[ext_resource type="Script" path="res://scenes/items/big_diamond.gd" id="1_6vlup"]
+[ext_resource type="Script" path="res://scripts/items/big_diamond.gd" id="1_6vlup"]
 [ext_resource type="Texture2D" uid="uid://bvrey1vep3cyl" path="res://sprites/12-Live and Coins/Big Diamond Idle (18x14).png" id="1_xdcmv"]
 [ext_resource type="AudioStream" uid="uid://bmbeerwl7byje" path="res://sounds/brackeys_platformer_assets/sounds/coin.wav" id="3_hcpej"]
 
@@ -139,4 +139,4 @@ hframes = 10
 [node name="DiamondObtainSound" type="AudioStreamPlayer" parent="Area2D"]
 stream = ExtResource("3_hcpej")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
