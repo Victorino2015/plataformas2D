@@ -1,6 +1,4 @@
 extends Area2D
-
-class_name Diamond
 	
 @onready var obtainSound : AudioStreamPlayer = $DiamondObtainSound;
 @onready var animation : AnimationPlayer = $AnimationPlayer;
