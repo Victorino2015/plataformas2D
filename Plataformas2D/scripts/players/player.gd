@@ -1,11 +1,17 @@
 extends CharacterBody2D
 class_name Player;
-#constantes
-const GRAVITY : int = 9;
-#variables
-var speed : int = 120;
-var direction : float = 0.0;
-var jump : int = 250;
+
+# Constantes
+const GRAVITY : int = 15
+const MAX_JUMP_TIME : float = 0.2  # Tiempo máximo que puede durar el salto
+
+# Variables
+var speed : int = 120
+var direction : float = 0.0
+var jump : int = 250
+var jump_time : float = 0.0
+var is_jumping : bool = false
+
 #nodos
 @onready var animation : AnimationPlayer = $Marker2D/AnimationPlayer;
 @onready var marker : Marker2D = $Marker2D;
@@ -13,13 +19,24 @@ var jump : int = 250;
 func _physics_process(delta):
 	change_animation();
 	verify_direction();
-	verify_jump();
+	verify_jump(delta);
 	apply_gravity();
 	move_and_slide();
 
-func verify_jump():
-	if is_on_floor() and Input.is_action_pressed("ui_up"):
-		velocity.y -= jump;
+#Salta en función de cuanto pulses la tecla.
+func verify_jump(delta):
+	if is_on_floor():
+		if Input.is_action_just_pressed("ui_up"):
+			velocity.y -= jump
+			is_jumping = true
+			jump_time = 0.0
+
+	if is_jumping:
+		if Input.is_action_pressed("ui_up") and jump_time < MAX_JUMP_TIME:
+			jump_time += delta
+			velocity.y = -jump
+		else:
+			is_jumping = false
 
 func apply_gravity():
 	if !is_on_floor():
