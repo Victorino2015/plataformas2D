@@ -11,17 +11,26 @@ var direction : float = 0.0
 var jump : int = 250
 var jump_time : float = 0.0
 var is_jumping : bool = false
+var is_attacking : bool = false;
 
 #nodos
 @onready var animation : AnimationPlayer = $Marker2D/AnimationPlayer;
 @onready var marker : Marker2D = $Marker2D;
 
 func _physics_process(delta):
-	change_animation();
-	verify_direction();
-	verify_jump(delta);
 	apply_gravity();
-	move_and_slide();
+	
+	if !is_attacking:
+		verify_direction();
+		verify_jump(delta);
+		move_and_slide();
+		verify_attack();
+	else:
+		animation.play("attack");
+		await(animation.animation_finished);
+		is_attacking = false;
+	
+	change_animation();
 
 #Salta en función de cuanto pulses la tecla.
 func verify_jump(delta):
@@ -59,3 +68,7 @@ func change_animation():
 		animation.play("iddle");
 	else:
 		animation.play("run");
+
+func verify_attack():
+	if is_on_floor() and Input.is_action_just_pressed("attack"):
+		is_attacking = true;
