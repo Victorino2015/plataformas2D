@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc5c1kfkn5v3k"]
+
+[ext_resource type="Texture2D" uid="uid://bvrey1vep3cyl" path="res://sprites/12-Live and Coins/Big Diamond Idle (18x14).png" id="1_jjcng"]
+[ext_resource type="Script" path="res://scripts/ui/ui_level.gd" id="1_wa118"]
+[ext_resource type="Texture2D" uid="uid://dl8m7oy280y1q" path="res://sprites/12-Live and Coins/Live Bar.png" id="2_fcd3c"]
+[ext_resource type="Texture2D" uid="uid://b50dk16nw1wgo" path="res://sprites/12-Live and Coins/Small Heart Idle (18x14).png" id="3_c1pon"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hic6t"]
+font_size = 10
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_wa118")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(13, 15)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_jjcng")
+hframes = 10
+
+[node name="DiamondNumLabel" type="Label" parent="CanvasLayer"]
+texture_filter = 2
+offset_left = 37.0
+offset_top = -2.0
+offset_right = 67.0
+offset_bottom = 12.0
+scale = Vector2(2.5, 2.5)
+text = "0
+"
+label_settings = SubResource("LabelSettings_hic6t")
+
+[node name="LiveBar" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(34, 223)
+texture = ExtResource("2_fcd3c")
+
+[node name="LiveHeard1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(21, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
+
+[node name="LiveHeard2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(32, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
+
+[node name="LiveHeard3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(43, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
