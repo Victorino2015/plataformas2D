@@ -1,0 +1,180 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc5c1kfkn5v3k"]
+
+[ext_resource type="Texture2D" uid="uid://bvrey1vep3cyl" path="res://sprites/12-Live and Coins/Big Diamond Idle (18x14).png" id="1_jjcng"]
+[ext_resource type="Script" path="res://scripts/ui/UI_level.gd" id="1_wa118"]
+[ext_resource type="Texture2D" uid="uid://dl8m7oy280y1q" path="res://sprites/12-Live and Coins/Live Bar.png" id="2_fcd3c"]
+[ext_resource type="Texture2D" uid="uid://b50dk16nw1wgo" path="res://sprites/12-Live and Coins/Small Heart Idle (18x14).png" id="3_c1pon"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hic6t"]
+font_size = 10
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_uit4s"]
+resource_name = "iddle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_c1pon")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_wwvai"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_c1pon")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2imc"]
+_data = {
+"RESET": SubResource("Animation_wwvai"),
+"iddle": SubResource("Animation_uit4s")
+}
+
+[node name="UI" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_wa118")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(13, 15)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_jjcng")
+hframes = 10
+
+[node name="DiamondNumLabel" type="Label" parent="CanvasLayer"]
+texture_filter = 2
+offset_left = 37.0
+offset_top = -2.0
+offset_right = 67.0
+offset_bottom = 12.0
+scale = Vector2(2.5, 2.5)
+text = "0
+"
+label_settings = SubResource("LabelSettings_hic6t")
+
+[node name="LiveBar" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(34, 223)
+texture = ExtResource("2_fcd3c")
+
+[node name="LiveHeard1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(21, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/LiveHeard1"]
+libraries = {
+"": SubResource("AnimationLibrary_c2imc")
+}
+autoplay = "iddle"
+
+[node name="LiveHeard2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(32, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/LiveHeard2"]
+libraries = {
+"": SubResource("AnimationLibrary_c2imc")
+}
+autoplay = "iddle"
+
+[node name="LiveHeard3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(43, 223)
+texture = ExtResource("3_c1pon")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/LiveHeard3"]
+libraries = {
+"": SubResource("AnimationLibrary_c2imc")
+}
+autoplay = "iddle"
